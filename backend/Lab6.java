@@ -13,6 +13,7 @@ public class Lab6 {
             System.out.println(l.lineRepresentation());
             
         }
+        System.out.println("Hello world");
         System.out.println("------------------------------->");
     
     }
