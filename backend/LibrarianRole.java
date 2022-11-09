@@ -2,6 +2,7 @@ package lab.backend;
 
 import java.time.*;
 import java.util.*;
+import lab.constants.FileNames;
 
 public class LibrarianRole {
 
@@ -9,8 +10,8 @@ public class LibrarianRole {
     private final StudentBookDatabase studentBookDb;
 
     public LibrarianRole() {
-        bookDb = new BookDatabase("Books.txt");
-        studentBookDb = new StudentBookDatabase("StudentsBooks.txt");
+        bookDb = new BookDatabase(FileNames.BOOKS_FILENAME);
+        studentBookDb = new StudentBookDatabase(FileNames.STUDENTSBOOKS_FILENAME);
     }
 
     public void addBook(String bookId, String title, String authorName, String publisherName, int quantity) {

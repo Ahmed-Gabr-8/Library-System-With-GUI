@@ -1,11 +1,12 @@
 package lab.backend;
+import lab.constants.FileNames;
 
 public class AdminRole {
 
     private final LibrarianUserDatabase libraianDb;
 
     public AdminRole() {
-        this.libraianDb = new LibrarianUserDatabase("Librarians.txt");
+        this.libraianDb = new LibrarianUserDatabase(FileNames.LIBRARIANS_FILENAME);
     }
 
     public void addLibrarian(String librarianId, String name, String email, String address, String phoneNumber) {
