@@ -35,6 +35,7 @@ public class FirstFrame extends javax.swing.JFrame implements Node {
         jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Library System");
         setBackground(new java.awt.Color(255, 255, 255));
         setResizable(false);
 
