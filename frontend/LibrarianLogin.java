@@ -4,23 +4,20 @@
  */
 package lab.frontend;
 import lab.constants.LoginCredentials;
-
-
-
 /**
  *
  * @author MO
  */
-public class AdminLogin extends javax.swing.JFrame implements Node {
+public class LibrarianLogin extends javax.swing.JFrame implements Node{
 
     /**
-     * Creates new form AdminLogin
+     * Creates new form LibrarianLogin
      */
     Node parent;
-
-    public AdminLogin(Node parent) {
+    public LibrarianLogin(Node parent) {
         initComponents();
         this.parent = parent;
+        
     }
 
     /**
@@ -40,7 +37,7 @@ public class AdminLogin extends javax.swing.JFrame implements Node {
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
-        setTitle("Admin Login");
+        setTitle("Librarian Login");
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
@@ -121,50 +118,47 @@ public class AdminLogin extends javax.swing.JFrame implements Node {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(61, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(27, 27, 27)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(50, 50, 50))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(71, Short.MAX_VALUE)
+                .addContainerGap(31, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26))
+                .addGap(27, 27, 27))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        this.setVisible(false);
-        javax.swing.JFrame parentFrame = (javax.swing.JFrame) parent;
-        parentFrame.setVisible(true);
-        
-
-    }//GEN-LAST:event_formWindowClosing
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String username = jTextField1.getText();
-        String password = jTextField2.getText();
-        if(!username.equals(LoginCredentials.ADMIN_USERNAME) || !password.equals(LoginCredentials.ADMIN_PASSWORD)){
-            javax.swing.JOptionPane.showMessageDialog(null, "Wrong Username or Password!");
-        }
-        
-        else{
-         // TODO go to Admin Role page
-         javax.swing.JOptionPane.showMessageDialog(null, "Success");
-        }
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        String username = jTextField1.getText();
+        String password = jTextField2.getText();
+        if(!username.equals(LoginCredentials.LIBRARIAN_USERNAME) || !password.equals(LoginCredentials.LIBRARIAN_PASSWORD)){
+            javax.swing.JOptionPane.showMessageDialog(null, "Wrong Username or Password!");
+        }
+
+        else{
+            // TODO go to Librarian Role page
+            javax.swing.JOptionPane.showMessageDialog(null, "Success!!!");
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        // TODO add your handling code here:
+        this.setVisible(false);
+        javax.swing.JFrame parentFrame = (javax.swing.JFrame) parent;
+        parentFrame.setVisible(true);
+    }//GEN-LAST:event_formWindowClosing
+
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

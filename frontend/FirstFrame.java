@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package lab.frontend;
+
 import lab.backend.LibrarianRole;
 
 /**
@@ -15,9 +16,8 @@ public class FirstFrame extends javax.swing.JFrame implements Node {
      * Creates new form LoginFrame
      */
     javax.swing.JFrame adminLogin;
-            
-            
-            
+    javax.swing.JFrame librarianLogin;
+
     public FirstFrame() {
         initComponents();
     }
@@ -82,13 +82,20 @@ public class FirstFrame extends javax.swing.JFrame implements Node {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        adminLogin = new AdminLogin(this);
+        if (adminLogin == null) {
+            adminLogin = new AdminLogin(this);
+        }
         adminLogin.setVisible(true);
-        this.setVisible(false);   
+        this.setVisible(false);
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+        if (librarianLogin == null) {
+            librarianLogin = new LibrarianLogin(this);
+        }
+        librarianLogin.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
