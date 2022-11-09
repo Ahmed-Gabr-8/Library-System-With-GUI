@@ -21,15 +21,17 @@ public class Lab6 {
     
     public static void main(String []args){
 
-    LibrarianRole libRole = new LibrarianRole();
-   
-    libRole.addBook("B123", "Math", "Prof. Amr", "Alex U", 5);
-    libRole.addBook("B456", "Math 2", "Prof. Mervat", "Alex U", 10);
-    libRole.addBook("B123", "Math 3", "Elfahhar", "Alex U", 3);
-    libRole.logout();
-    }
+//    LibrarianRole libRole = new LibrarianRole();
+//   
+//    libRole.addBook("B123", "Math", "Prof. Amr", "Alex U", 5);
+//    libRole.addBook("B456", "Math 2", "Prof. Mervat", "Alex U", 10);
+//    libRole.addBook("B123", "Math 3", "Elfahhar", "Alex U", 3);
+//    libRole.logout();
+//    }
+
+        System.out.println("You are running main function. Shouldn't be running");
     
-}
+}}
 
 //contains different book with same id
 //If the file from the begining contains same id.
