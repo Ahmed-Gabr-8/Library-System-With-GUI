@@ -1,6 +1,6 @@
 package lab.backend;
 
-public class LibrarianUser implements LibraryObject{
+class LibrarianUser implements LibraryObject{
 
     private String id;
     private String name;
@@ -8,7 +8,7 @@ public class LibrarianUser implements LibraryObject{
     private String address;
     private String phoneNumber;
 
-    public LibrarianUser(String id, String name, String email, String address, String phoneNumber) {
+    LibrarianUser(String id, String name, String email, String address, String phoneNumber) {
         this.id = id; 
         this.name = name;
         this.email = email;
@@ -17,13 +17,13 @@ public class LibrarianUser implements LibraryObject{
     }
     
     @Override
-    public String getSearchKey() {
+    public  String getSearchKey() {
         return id;
     }
     
     
     @Override
-    public String lineRepresentation() {
+    public  String lineRepresentation() {
         return String.join(",", id, name, email, address, phoneNumber);
 
     }

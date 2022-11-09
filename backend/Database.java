@@ -3,37 +3,37 @@ package lab.backend;
 import java.util.*;
 import java.io.*;
 
-public abstract class Database {
+abstract class Database {
 
     private ArrayList<LibraryObject> records = new ArrayList<>();
     private String filename;
     private boolean checkLoaded;
 
-    public Database(String filename) {
+    Database(String filename) {
         this.filename = filename;
     }
 
-    public String getFilename() {
+    String getFilename() {
         return filename;
     }
 
-    public void setFilename(String filename) {
+    void setFilename(String filename) {
         this.filename = filename;
     }
 
-    public void setCheckLoaded(boolean checkLoaded) {
+    void setCheckLoaded(boolean checkLoaded) {
         this.checkLoaded = checkLoaded;
     }
 
-    public void correctLoaded() {
+    void correctLoaded() {
         if (!checkLoaded) {
             readFromFile();
         }
     }
 
-    public abstract LibraryObject createRecordFrom(String line);
+    abstract LibraryObject createRecordFrom(String line);
 
-    public void readFromFile() {
+    void readFromFile() {
         try {
             File file = new File(getFilename());
             Scanner scan = new Scanner(file);
@@ -48,7 +48,7 @@ public abstract class Database {
         }
     }
 
-    public boolean contains(String key) {
+    boolean contains(String key) {
         correctLoaded();
         for (int i = 0; i < records.size(); i++) {
             if (records.get(i).getSearchKey().equals(key)) {
@@ -59,12 +59,12 @@ public abstract class Database {
 
     }
 
-    public ArrayList<LibraryObject> returnAllRecords() {
+    ArrayList<LibraryObject> returnAllRecords() {
         correctLoaded();
         return records;
     }
 
-    public LibraryObject getRecord(String key) {
+    LibraryObject getRecord(String key) {
 
         if (contains(key)) {
             for (int i = 0; i < records.size(); i++) {
@@ -78,7 +78,7 @@ public abstract class Database {
         return null;
     }
 
-    public void insertRecord(LibraryObject record) {
+    void insertRecord(LibraryObject record) {
         correctLoaded();
         if(contains(record.getSearchKey()))
             System.out.println("Repeated Id.");
@@ -86,7 +86,7 @@ public abstract class Database {
             records.add(record);
     }
 
-    public void deleteRecord(String key) {
+    void deleteRecord(String key) {
         LibraryObject temp = getRecord(key);
         if (temp == null)
             System.out.println("Record not found.");
@@ -97,7 +97,7 @@ public abstract class Database {
         }
     }
 
-    public void saveToFile() {
+    void saveToFile() {
         correctLoaded();
 
         try {

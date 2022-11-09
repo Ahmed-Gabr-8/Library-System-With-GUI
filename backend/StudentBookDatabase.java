@@ -1,13 +1,13 @@
 package lab.backend;
 
 import java.time.LocalDate;
-public class StudentBookDatabase extends Database {
-    public StudentBookDatabase(String filename) {
+class StudentBookDatabase extends Database {
+    StudentBookDatabase(String filename) {
         super(filename);
     }
 
     @Override
-    public StudentBook createRecordFrom(String line) {
+    StudentBook createRecordFrom(String line) {
         String[] studentBookDataAsStrings = line.split(",");
         String[] dateParameters = studentBookDataAsStrings[2].split("-");
 

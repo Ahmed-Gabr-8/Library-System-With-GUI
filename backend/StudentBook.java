@@ -2,37 +2,37 @@ package lab.backend;
 
 import java.time.LocalDate;
 
-public class StudentBook implements LibraryObject {
+class StudentBook implements LibraryObject {
 
     private String studentId;
     private String bookId;
     private LocalDate borrowDate;
 
-    public StudentBook(String studentId, String bookId, LocalDate borrowDate) {
+     StudentBook(String studentId, String bookId, LocalDate borrowDate) {
         this.studentId = studentId;
         this.bookId = bookId;
         this.borrowDate = borrowDate;
     }
 
-    public String getStudentId() {
+     String getStudentId() {
         return studentId;
     }
 
-    public String getBookId() {
+     String getBookId() {
         return bookId;
     }
 
-    public LocalDate getBorrowDate() {
+     LocalDate getBorrowDate() {
         return borrowDate;
     }
 
     @Override
-    public String getSearchKey() {
+     public String getSearchKey() {
         return String.join(",",getStudentId(), getBookId());
     }
     
     @Override
-    public String lineRepresentation() {
+     public String lineRepresentation() {
         String year = String.valueOf(borrowDate.getYear());
         String month = String.valueOf(borrowDate.getMonthValue() );
         String day = String.valueOf(borrowDate.getDayOfMonth());
