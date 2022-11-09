@@ -4,6 +4,8 @@
  */
 package lab.frontend;
 
+
+
 /**
  *
  * @author MO
@@ -14,6 +16,7 @@ public class AdminLogin extends javax.swing.JFrame implements Node {
      * Creates new form AdminLogin
      */
     Node parent;
+
     public AdminLogin(Node parent) {
         initComponents();
         this.parent = parent;
@@ -113,12 +116,13 @@ public class AdminLogin extends javax.swing.JFrame implements Node {
         this.setVisible(false);
         javax.swing.JFrame parentFrame = (javax.swing.JFrame) parent;
         parentFrame.setVisible(true);
+        
+
     }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments
      */
- 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
