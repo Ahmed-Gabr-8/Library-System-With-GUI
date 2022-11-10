@@ -13,10 +13,12 @@ public class LibrarianLogin extends javax.swing.JFrame implements Node{
     /**
      * Creates new form LibrarianLogin
      */
-    Node parent;
+    private Node parent;
+    private LibrarianRoleWindow lbRoleWindow;
     public LibrarianLogin(Node parent) {
         initComponents();
         this.parent = parent;
+        lbRoleWindow = null;
         
     }
 
@@ -146,8 +148,13 @@ public class LibrarianLogin extends javax.swing.JFrame implements Node{
         }
 
         else{
-            // TODO go to Librarian Role page
-            javax.swing.JOptionPane.showMessageDialog(null, "Success!!!");
+            if(lbRoleWindow == null ){
+                lbRoleWindow = new LibrarianRoleWindow(this);
+            }
+           
+            this.setVisible(false);
+            lbRoleWindow.setVisible(true);
+            
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

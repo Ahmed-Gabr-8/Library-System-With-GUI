@@ -16,7 +16,7 @@ public class AdminLogin extends javax.swing.JFrame implements Node {
     /**
      * Creates new form AdminLogin
      */
-    Node parent;
+    private Node parent;
 
     public AdminLogin(Node parent) {
         initComponents();
@@ -146,7 +146,7 @@ public class AdminLogin extends javax.swing.JFrame implements Node {
     }//GEN-LAST:event_formWindowClosing
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String username = jTextField1.getText();
+        String username = jTextField1.getText();       
         String password = String.valueOf(jPasswordField1.getPassword());
         if(!username.equals(LoginCredentials.ADMIN_USERNAME) || !password.equals(LoginCredentials.ADMIN_PASSWORD)){
             javax.swing.JOptionPane.showMessageDialog(null, "Wrong Username or Password!");
