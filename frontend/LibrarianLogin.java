@@ -15,10 +15,10 @@ public class LibrarianLogin extends javax.swing.JFrame implements Node{
      */
     private Node parent;
     private LibrarianRoleWindow lbRoleWindow;
+    
     public LibrarianLogin(Node parent) {
         initComponents();
-        this.parent = parent;
-        lbRoleWindow = null;
+        this.parent = parent;       
         
     }
 
@@ -142,7 +142,7 @@ public class LibrarianLogin extends javax.swing.JFrame implements Node{
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String username = jTextField1.getText();
-        String password = String.valueOf(jPasswordField1.getText());
+        String password = String.valueOf(jPasswordField1.getPassword());
         if(!username.equals(LoginCredentials.LIBRARIAN_USERNAME) || !password.equals(LoginCredentials.LIBRARIAN_PASSWORD)){
             javax.swing.JOptionPane.showMessageDialog(null, "Wrong Username or Password!");
         }

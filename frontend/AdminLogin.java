@@ -17,6 +17,7 @@ public class AdminLogin extends javax.swing.JFrame implements Node {
      * Creates new form AdminLogin
      */
     private Node parent;
+    private AdminRoleWindow adRoleWindow;
 
     public AdminLogin(Node parent) {
         initComponents();
@@ -153,8 +154,12 @@ public class AdminLogin extends javax.swing.JFrame implements Node {
         }
         
         else{
-         // TODO go to Admin Role page
-         javax.swing.JOptionPane.showMessageDialog(null, "Success");
+            if(adRoleWindow == null ){
+                adRoleWindow = new AdminRoleWindow(this);
+            }
+           
+            this.setVisible(false);
+            adRoleWindow.setVisible(true);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
