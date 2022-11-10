@@ -26,6 +26,15 @@ public class LibrarianRole {
     public Book[] getListOfBooks() {
         return bookDb.returnAllRecords().toArray(new Book[0]);
     }
+    
+    public String[] getListOfBooksAsString() {
+        Book[] books = this.getListOfBooks();
+        String[] booksStrings = new String[books.length];
+        for(int i=0; i< books.length; i++){
+            booksStrings[i] = books[i].lineRepresentation();
+        }
+        return booksStrings;
+    }
 
     public StudentBook[] getListOfBorrowingOperations() {
         return studentBookDb.returnAllRecords().toArray(new StudentBook[0]);
