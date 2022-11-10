@@ -21,6 +21,15 @@ public class AdminRole {
     public LibrarianUser[] getListOfLibrarians() {
         return libraianDb.returnAllRecords().toArray(new LibrarianUser[0]);
     }
+    
+    public String[] getListOfLibrariansAsString() {
+        LibrarianUser[] librarianUsers = this.getListOfLibrarians();
+        String[] librarianUsersStrings = new String[librarianUsers.length];
+        for(int i=0; i< librarianUsers.length; i++){
+            librarianUsersStrings[i] = librarianUsers[i].lineRepresentation();
+        }
+        return librarianUsersStrings;
+    }
 
     public void removeLibrarian(String key) {
         libraianDb.deleteRecord(key);
