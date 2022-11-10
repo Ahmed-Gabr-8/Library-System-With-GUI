@@ -145,9 +145,9 @@ public class AdminRoleWindow extends javax.swing.JFrame implements Node {
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
-        adRole.logout();
-        
+        adRole.logout();        
         this.setVisible(false);
+        System.exit(0);
     }//GEN-LAST:event_jButton7ActionPerformed
 
 

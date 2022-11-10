@@ -207,6 +207,8 @@ public class LibrarianRoleWindow extends javax.swing.JFrame implements Node {
         lbRole.logout();
         
         this.setVisible(false);
+        System.exit(0);
+        
         
     }//GEN-LAST:event_jButton7ActionPerformed
 
