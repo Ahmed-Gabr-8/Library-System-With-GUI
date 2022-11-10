@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package lab.frontend;
+
 import lab.backend.LibrarianRole;
 
 import javax.swing.JFrame;
@@ -18,7 +19,7 @@ public class AddBookWindow extends javax.swing.JFrame implements Node {
      * Creates new form AddBook
      */
     private Node parent;
-    
+
     public AddBookWindow(Node node) {
         initComponents();
         this.setTitle("Add Book");
@@ -46,7 +47,12 @@ public class AddBookWindow extends javax.swing.JFrame implements Node {
         noOfCopies = new javax.swing.JTextField();
         addButton = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jLabel1.setBackground(new java.awt.Color(0, 255, 0));
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
@@ -179,7 +185,7 @@ public class AddBookWindow extends javax.swing.JFrame implements Node {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bookIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookIdActionPerformed
-        
+
     }//GEN-LAST:event_bookIdActionPerformed
 
     private void titleNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_titleNameActionPerformed
@@ -192,8 +198,6 @@ public class AddBookWindow extends javax.swing.JFrame implements Node {
 
     private void noOfCopiesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_noOfCopiesActionPerformed
 
-        
-
 //        try{
 //        int copies = Integer.parseInt(noOfCopies.getText());
 //        System.out.println("Copies = "  + copies);
@@ -205,77 +209,67 @@ public class AddBookWindow extends javax.swing.JFrame implements Node {
 //        }
     }//GEN-LAST:event_noOfCopiesActionPerformed
 
-    private int noOfCopiesCheck() throws NumberFormatException
-    {
-        
+    private int noOfCopiesCheck() throws NumberFormatException {
+
         return Integer.parseInt(noOfCopies.getText());
-        
-        
+
     }
-    
-    private boolean isFieldEmpty()
-    {
-        if(bookId.getText().isBlank() || titleName.getText().isBlank()|| authorName.getText().isBlank() || publisherName.getText().isBlank() || noOfCopies.getText().isBlank() )
+
+    private boolean isFieldEmpty() {
+        if (bookId.getText().isBlank() || titleName.getText().isBlank() || authorName.getText().isBlank() || publisherName.getText().isBlank() || noOfCopies.getText().isBlank()) {
             return true;
-        
-        
+        }
+
         return false;
     }
-            
-    
+
+
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
         // TODO add your handling code here:
-        
-        
+
         int copies = 0;
-        
+
         //check if fields are empty first.
-        
-        if(isFieldEmpty())
-        {
+        if (isFieldEmpty()) {
             JOptionPane.showMessageDialog(null, "Some fields are empty");
             return;
         }
-            
-        
+
         //check if number of Copies is a string not a numeric value.
-        try{
-        copies = noOfCopiesCheck();
-        }
-        catch(NumberFormatException e)
-        {
-            JOptionPane.showMessageDialog(null, "You should enter a numeric value in the field whose name is " +
-                   " \"No of Copies\" ");
+        try {
+            copies = noOfCopiesCheck();
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "You should enter a numeric value in the field whose name is "
+                    + " \"No of Copies\" ");
             return;
-            
+
         }
-        
-        
-         this.setVisible(false);
-         LibrarianRoleWindow parentFrame = (LibrarianRoleWindow) parent;
-         parentFrame.setVisible(true);
-        
+
+        this.setVisible(false);
+        LibrarianRoleWindow parentFrame = (LibrarianRoleWindow) parent;
+        parentFrame.setVisible(true);
+
         //TODO check if the BookId is repeated.
-        
-        
         String bookID = bookId.getText();
         String title = titleName.getText();
         String author = authorName.getText();
         String publisher = publisherName.getText();
-        parentFrame.getLbRole().addBook(bookID,title,author,publisher,copies);
-                //addBook(bookID,title,author,publisher,copies);
-        
+        parentFrame.getLbRole().addBook(bookID, title, author, publisher, copies);
+        //addBook(bookID,title,author,publisher,copies);
+
 //        this.setVisible(false);
 //        
 //        javax.swing.JFrame parentFrame = (javax.swing.JFrame) parent;
 //        parentFrame.setVisible(true);
-        
+
     }//GEN-LAST:event_addButtonActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+         this.setVisible(false);
+        javax.swing.JFrame parentFrame = (javax.swing.JFrame) parent;
+        parentFrame.setVisible(true);
+    }//GEN-LAST:event_formWindowClosing
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addButton;
@@ -299,8 +293,9 @@ public class AddBookWindow extends javax.swing.JFrame implements Node {
 
     @Override
     public boolean hasNodeParent() {
-        if(this.getNodeParent() == null)
+        if (this.getNodeParent() == null) {
             return false;
+        }
         return true;
         //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }

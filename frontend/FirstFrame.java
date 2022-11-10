@@ -4,7 +4,6 @@
  */
 package lab.frontend;
 
-import lab.backend.LibrarianRole;
 
 /**
  *
@@ -34,7 +33,7 @@ public class FirstFrame extends javax.swing.JFrame implements Node {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Library System");
         setBackground(new java.awt.Color(255, 255, 255));
         setResizable(false);

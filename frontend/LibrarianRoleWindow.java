@@ -10,6 +10,7 @@ public class LibrarianRoleWindow extends javax.swing.JFrame implements Node {
     private Node parent;
     private AddBookWindow addBookWindow;
     private LibrarianRole lbRole;
+    private ViewTableWindow viewBooksWindow;
     
 
     public LibrarianRole getLbRole() {
@@ -22,7 +23,6 @@ public class LibrarianRoleWindow extends javax.swing.JFrame implements Node {
         lbRole = new LibrarianRole();
         this.setTitle("Librarian Role");
         this.parent = parent;
-        addBookWindow = null;
     }
 
     /**
@@ -42,6 +42,7 @@ public class LibrarianRoleWindow extends javax.swing.JFrame implements Node {
         jButton7 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
@@ -168,9 +169,24 @@ public class LibrarianRoleWindow extends javax.swing.JFrame implements Node {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
+        if(viewBooksWindow == null)
+        {
+            viewBooksWindow = new ViewTableWindow(this, new String[]{"Book ID", "Title", "Author Name", "Publisher", "No Of copies"}, "View Books");
         
-
+        }
+        
+        String[] booksStrings = lbRole.getListOfBooksAsString();
+        if(booksStrings.length == 0){
+            javax.swing.JOptionPane.showMessageDialog(null, "No Books Added yet");
+            return;
+        }
+        String[][] bookData = new String[booksStrings.length][5];
+        for(int i =0; i<booksStrings.length; i++){
+            bookData[i] = booksStrings[i].split(",");
+        }
+        viewBooksWindow.setTableData(bookData);
+        this.setVisible(false);
+        viewBooksWindow.setVisible(true);      
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
