@@ -78,18 +78,22 @@ abstract class Database {
         return null;
     }
 
-    void insertRecord(LibraryObject record) {
+    void insertRecord(LibraryObject record) throws RepeatedIdException {
         correctLoaded();
-        if(contains(record.getSearchKey()))
+        if(contains(record.getSearchKey())){
             System.out.println("Repeated Id.");
+            throw new RepeatedIdException();
+        }
         else
             records.add(record);
     }
 
-    void deleteRecord(String key) {
+    void deleteRecord(String key) throws IdNotFoundException{
         LibraryObject temp = getRecord(key);
-        if (temp == null)
+        if (temp == null){
             System.out.println("Record not found.");
+            throw new IdNotFoundException();
+        }
         else
         {
             records.remove(temp);

@@ -14,7 +14,7 @@ public class LibrarianRole {
         studentBookDb = new StudentBookDatabase(FileNames.STUDENTSBOOKS_FILENAME);
     }
 
-    public void addBook(String bookId, String title, String authorName, String publisherName, int quantity) {
+    public void addBook(String bookId, String title, String authorName, String publisherName, int quantity) throws RepeatedIdException{
         if (bookDb == null) {
             System.out.println("Database not found");
         } else {
@@ -51,7 +51,7 @@ public class LibrarianRole {
         return StudentsBooksStrings;
     }
 
-    public int borrowBook(String studentId, String bookId, LocalDate borrowDate) {
+    public int borrowBook(String studentId, String bookId, LocalDate borrowDate) throws RepeatedIdException{
         Book book = (Book) bookDb.getRecord(bookId);
         if(book==null)
         { System.out.println("Book id doesn't exist");
@@ -77,7 +77,7 @@ public class LibrarianRole {
 
     }
 
-    public double returnBook(String studentId, String bookId, LocalDate returnDate) {
+    public double returnBook(String studentId, String bookId, LocalDate returnDate) throws IdNotFoundException {
 
         Book book = (Book) bookDb.getRecord(bookId);
         if(book==null)

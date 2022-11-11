@@ -9,7 +9,7 @@ public class AdminRole {
         this.libraianDb = new LibrarianUserDatabase(FileNames.LIBRARIANS_FILENAME);
     }
 
-    public void addLibrarian(String librarianId, String name, String email, String address, String phoneNumber) {
+    public void addLibrarian(String librarianId, String name, String email, String address, String phoneNumber) throws RepeatedIdException {
 
         if (libraianDb == null) 
             System.out.println("Database not found");
@@ -31,7 +31,7 @@ public class AdminRole {
         return librarianUsersStrings;
     }
 
-    public void removeLibrarian(String key) {
+    public void removeLibrarian(String key) throws IdNotFoundException {
         libraianDb.deleteRecord(key);
     }
 
