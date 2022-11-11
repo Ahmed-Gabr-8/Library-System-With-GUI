@@ -8,6 +8,7 @@ import lab.backend.LibrarianRole;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import lab.backend.RepeatedIdException;
 
 /**
  *
@@ -48,6 +49,7 @@ public class AddBookWindow extends javax.swing.JFrame implements Node {
         addButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
@@ -214,60 +216,59 @@ public class AddBookWindow extends javax.swing.JFrame implements Node {
         return false;
     }
 
+    private void checkFieldEmpty() throws EmptyFieldException {
+       if(isFieldEmpty()){
+           throw new EmptyFieldException();
+       }
+    }
 
-    private void clear()
-    {
+    private void clear() {
         bookId.setText("");
         titleName.setText("");
         authorName.setText("");
         publisherName.setText("");
         noOfCopies.setText("");
     }
-    
+
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
-        // TODO add your handling code here:
-
-        int copies = 0;
-
-        //check if fields are empty first.
-        if (isFieldEmpty()) {
-            JOptionPane.showMessageDialog(null, "Some fields are empty");
-            return;
-        }
-
+    
         //check if number of Copies is a string not a numeric value.
         try {
-            copies = noOfCopiesCheck();
-        } catch (NumberFormatException e) {
+            checkFieldEmpty();
+            int copies = noOfCopiesCheck();
+            this.setVisible(false);
+            LibrarianRoleWindow parentFrame = (LibrarianRoleWindow) parent;
+            parentFrame.setVisible(true);
+
+            String bookID = bookId.getText();
+            String title = titleName.getText();
+            String author = authorName.getText();
+            String publisher = publisherName.getText();
+            parentFrame.getLbRole().addBook(bookID, title, author, publisher, copies);
+            JOptionPane.showMessageDialog(null, "The book with id = " + bookId.getText() + " has been successfully added.");
+            
+        } 
+        
+        
+        catch(EmptyFieldException efe){
+            JOptionPane.showMessageDialog(null, "Some fields are empty");
+        }
+        catch (NumberFormatException nfe) {
             JOptionPane.showMessageDialog(null, "You should enter a numeric value in the field whose name is "
                     + " \"No of Copies\" ");
-            return;
-
+        }
+        
+        catch(RepeatedIdException rie){
+             JOptionPane.showMessageDialog(null, "The book with ID " + bookId + " already exists!");
         }
 
-        this.setVisible(false);
-        LibrarianRoleWindow parentFrame = (LibrarianRoleWindow) parent;
-        parentFrame.setVisible(true);
-        
-        String bookID = bookId.getText();
-        String title = titleName.getText();
-        String author = authorName.getText();
-        String publisher = publisherName.getText();
-        parentFrame.getLbRole().addBook(bookID, title, author, publisher, copies);
-
-        
         //TODO check if the BookId is repeated.
-        
-        
-        
-        
-        JOptionPane.showMessageDialog(null, "The book with id = " + bookId.getText() + " has been successfully added.");
         clear();
-        
+
     }//GEN-LAST:event_addButtonActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-         this.setVisible(false);
+        this.setVisible(false);
         javax.swing.JFrame parentFrame = (javax.swing.JFrame) parent;
         parentFrame.setVisible(true);
         clear();

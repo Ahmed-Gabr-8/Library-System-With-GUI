@@ -3,11 +3,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package lab.frontend;
+
 import javax.swing.JOptionPane;
 import java.util.ArrayList;
 import lab.backend.AdminRole;
 import javax.swing.JFrame;
-
+import lab.backend.RepeatedIdException;
 
 /**
  *
@@ -15,14 +16,14 @@ import javax.swing.JFrame;
  */
 public class AddLibrarianWindow extends javax.swing.JFrame implements Node {
 // private ArrayList<String> data ;
-   private Node parent;
-    
+
+    private Node parent;
+
     public AddLibrarianWindow(Node parent) {
         initComponents();
         this.setTitle("Add Librarian");
-        this.parent =  parent;
+        this.parent = parent;
     }
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -46,6 +47,7 @@ public class AddLibrarianWindow extends javax.swing.JFrame implements Node {
         Name = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
@@ -151,43 +153,55 @@ public class AddLibrarianWindow extends javax.swing.JFrame implements Node {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-       this.setVisible(false);
+        this.setVisible(false);
         javax.swing.JFrame parentFrame = (javax.swing.JFrame) parent;
         parentFrame.setVisible(true);
     }//GEN-LAST:event_formWindowClosing
-  /* public static void checkID(ArrayList data,String id)
+    /* public static void checkID(ArrayList data,String id)
    {
    
    
    } */
-       private boolean isFieldEmpty()
-    {
-        if(Id.getText().isBlank() || Name.getText().isBlank()|| Email.getText().isBlank() || Address.getText().isBlank() || PhoneNumber.getText().isBlank()   )
+    private boolean isFieldEmpty() {
+        if (Id.getText().isBlank() || Name.getText().isBlank() || Email.getText().isBlank() || Address.getText().isBlank() || PhoneNumber.getText().isBlank()) {
             return true;
-        
-        
+        }
+
         return false;
     }
-    
+
+    private void clear() {
+        Address.setText("");
+        Id.setText("");
+        Email.setText("");
+        Name.setText("");
+        PhoneNumber.setText("");
+    }
+
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
-        if(isFieldEmpty())
-        {
+
+        if (isFieldEmpty()) {
             JOptionPane.showMessageDialog(null, "Some fields are empty");
             return;
-        }                 
-        
-        AdminRoleWindow parentFrame = (AdminRoleWindow) parent;     
-        String id = Id.getText() ;
+        }
+
+        AdminRoleWindow parentFrame = (AdminRoleWindow) parent;
+        String id = Id.getText();
         String name = Name.getText();
         String email = Email.getText();
         String address = Address.getText();
         String phoneNumber = PhoneNumber.getText();
-        parentFrame.getAdRole().addLibrarian(id, name, email, address, phoneNumber);      
-        JOptionPane.showMessageDialog(null,"The librarian with id: "+id+" has been added successfully " );
-        this.setVisible(false);
-        parentFrame.setVisible(true);
-         
+        try {
+
+            parentFrame.getAdRole().addLibrarian(id, name, email, address, phoneNumber);
+            JOptionPane.showMessageDialog(null, "The librarian with id: " + id + " has been added successfully ");
+            this.setVisible(false);
+            parentFrame.setVisible(true);
+        } catch (RepeatedIdException rie) {
+            JOptionPane.showMessageDialog(null, "The librarian with id: " + id + " already exists!");
+        }
+        clear();
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void IdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IdActionPerformed
@@ -197,7 +211,6 @@ public class AddLibrarianWindow extends javax.swing.JFrame implements Node {
     /**
      * @param args the command line arguments
      */
-  
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField Address;
@@ -215,15 +228,15 @@ public class AddLibrarianWindow extends javax.swing.JFrame implements Node {
    @Override
     public Node getNodeParent() {
         return this.parent;
-       
-    }
 
+    }
 
     @Override
     public boolean hasNodeParent() {
-        if(this.getNodeParent() == null)
+        if (this.getNodeParent() == null) {
             return false;
+        }
         return true;
-        
+
     }
 }

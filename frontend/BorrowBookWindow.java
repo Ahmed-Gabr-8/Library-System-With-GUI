@@ -10,23 +10,21 @@ import java.time.ZoneId;
 import lab.backend.LibrarianRole;
 import javax.swing.JOptionPane;
 import java.util.TimeZone;
+import lab.backend.RepeatedIdException;
 
 /**
  *
  * @author User
  */
-public class BorrowBookWindow extends javax.swing.JFrame implements Node{
+public class BorrowBookWindow extends javax.swing.JFrame implements Node {
 
     private Node parent;
-    
-    
-    
+
     public BorrowBookWindow(Node parent) {
         initComponents();
         this.setTitle("Borrow Book");
         this.parent = parent;
-        
-        
+
     }
 
     /**
@@ -47,6 +45,7 @@ public class BorrowBookWindow extends javax.swing.JFrame implements Node{
         borrowButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
@@ -144,43 +143,37 @@ public class BorrowBookWindow extends javax.swing.JFrame implements Node{
     }//GEN-LAST:event_bookIdActionPerformed
 
     private boolean isFieldEmpty() {
-        
+
         //String.valueOf(borrowDate.getDate()).isBlank() --> didnot Work.
-        if (bookId.getText().isBlank() || studentId.getText().isBlank() || borrowDate.getDate() == null) 
+        if (bookId.getText().isBlank() || studentId.getText().isBlank() || borrowDate.getDate() == null) {
             return true;
-        
+        }
 
         return false;
     }
-    
-    
-    private LocalDate fromStringTOLocalDate(String s)
-    {
+
+    private LocalDate fromStringTOLocalDate(String s) {
         LocalDate borrowDateLocal;
         //borrowDateLocal.withDayOfMonth();
         return null;
     }
-    
-    
-    private void clear()
-    {
+
+    private void clear() {
         studentId.setText("");
         bookId.setText("");
         borrowDate.setDate(null);
     }
-    
+
     private void borrowButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_borrowButtonActionPerformed
         // TODO add your handling code here:
-        
-        
+
         //first: check if some fields are empty.
-        if(isFieldEmpty())
-        {
+        if (isFieldEmpty()) {
             JOptionPane.showMessageDialog(null, "Some fields are empty");
             clear();
-            return ;
+            return;
         }
-        
+
         this.setVisible(false);
         LibrarianRoleWindow parentFrame = (LibrarianRoleWindow) parent;
         parentFrame.setVisible(true);
@@ -190,73 +183,55 @@ public class BorrowBookWindow extends javax.swing.JFrame implements Node{
         String studentID = studentId.getText();
         //error cannot convert from Date to Local Date.
         //LocalDate borrowDateTime = (LocalDate) (borrowDate.getDate());
-        
+
 //      Date input = new Date();
 //      System.out.println(input);
 //      LocalDate date1 = borrowDate.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 //      System.out.println(date);
-        
-          
         LocalDate date = LocalDate.ofInstant(borrowDate.getDate().toInstant(), ZoneId.systemDefault());
-        
-        
-        int result = parentFrame.getLbRole().borrowBook(studentID, bookID, date);
-        
-        if(result == -1)
-        {
-            JOptionPane.showMessageDialog(null,"No Books with is found with id = " + bookID);
+
+        try {
+            int result = parentFrame.getLbRole().borrowBook(studentID, bookID, date);
+
+            if (result == -1) {
+                JOptionPane.showMessageDialog(null, "No Books with is found with id = " + bookID);
+
+            } //third: All the copies of the book were borrowed and no copies left.
+            else if (result == 1) {
+                JOptionPane.showMessageDialog(null, "The student with id = " + studentID
+                        + " has already borrowed a copy of the book with id = " + bookID + " and hasn't returned it yet.");
+
+            } else if (result == 0) {
+                JOptionPane.showMessageDialog(null, "All copies of the book with id = " + bookID
+                        + " have been borrowed and no copy is left for the student with id = " + studentID);
+
+            } else {
+                //Fourth: Successfully added.
+                JOptionPane.showMessageDialog(null, "The student with id = " + studentID + " has successfully borrowed a copy of the book with id = " + bookID);
+            }
             clear();
-            return ;
+
+        } catch (RepeatedIdException rie) {
+            JOptionPane.showMessageDialog(null, "The student with id = " + studentID
+                    + " has already borrowed a copy of the book with id = " + bookID + " and hasn't returned it yet.");
+
         }
-        
-        //second: student id has borrowed and hasnot returned the book.
-        if(result == 1)
-        {
-            JOptionPane.showMessageDialog(null,"The student with id = " + studentID +
-                    " has already borrowed a copy of the book with id = " + bookID + " and hasn't returned it yet.");
-            clear();
-            return ;
-        }
-        
-        //third: All the copies of the book were borrowed and no copies left.
-        if(result == 0)
-        {
-            JOptionPane.showMessageDialog(null,"All copies of the book with id = " + bookID + 
-                    " have been borrowed and no copy is left for the student with id = " + studentID);
-            
-            clear();
-            return;
-        }
-        
-        //Fourth: Successfully added.
-        JOptionPane.showMessageDialog(null, "The student with id = " + studentID + " has successfully borrowed a copy of the book with id = " + bookID);
-        clear();
-        
-        
-        
-        
+
+
     }//GEN-LAST:event_borrowButtonActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         // TODO add your handling code here:
-        
+
         this.setVisible(false);
         LibrarianRoleWindow parentFrame = (LibrarianRoleWindow) parent;
         parentFrame.setVisible(true);
         clear();
     }//GEN-LAST:event_formWindowClosing
 
-    
-     
-        
-        
-
-       
-    
     /**
      * @param args the command line arguments
      */
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField bookId;

@@ -8,15 +8,16 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import lab.backend.LibrarianRole;
 import javax.swing.JOptionPane;
+import lab.backend.IdNotFoundException;
 
 /**
  *
  * @author User
  */
-public class ReturnBookWindow extends javax.swing.JFrame implements Node{
+public class ReturnBookWindow extends javax.swing.JFrame implements Node {
 
     private Node parent;
-    
+
     public ReturnBookWindow(Node parent) {
         initComponents();
         this.setTitle("Return Book");
@@ -41,6 +42,7 @@ public class ReturnBookWindow extends javax.swing.JFrame implements Node{
         returnButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
@@ -128,72 +130,64 @@ public class ReturnBookWindow extends javax.swing.JFrame implements Node{
     }//GEN-LAST:event_studentIdActionPerformed
 
     private boolean isFieldEmpty() {
-        
+
         //String.valueOf(borrowDate.getDate()).isBlank() --> didnot Work.
-        if (bookId.getText().isBlank() || studentId.getText().isBlank() || returnDate.getDate() == null) 
+        if (bookId.getText().isBlank() || studentId.getText().isBlank() || returnDate.getDate() == null) {
             return true;
-        
+        }
 
         return false;
     }
-    
-    private void clear()
-    {
+
+    private void clear() {
         studentId.setText("");
         bookId.setText("");
         returnDate.setDate(null);
     }
-    
+
     private void returnButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnButtonActionPerformed
         // TODO add your handling code here:
-        
-        
+
         //first: check if some fields are empty.
-        if(isFieldEmpty())
-        {
+        if (isFieldEmpty()) {
             JOptionPane.showMessageDialog(null, "Some fields are empty");
-            clear();
-            return ;
-        }
-        
-        
-        //check: if no bookID or studentID is found.
-        
-        
-        
-        //Record should be deleted from the list of borrowing operations.
-        
-        String studentID = studentId.getText();
-        String bookID = bookId.getText();
-        
-        
-        this.setVisible(false);
-        LibrarianRoleWindow parentFrame = (LibrarianRoleWindow) parent;
-        parentFrame.setVisible(true);
-        
-        LocalDate returnDateTime = LocalDate.ofInstant(returnDate.getDate().toInstant(), ZoneId.systemDefault());
-        double result = parentFrame.getLbRole().returnBook(studentID, bookID, returnDateTime);
-        
-        if(result == -1)
-        {
-            JOptionPane.showMessageDialog(null, "No Book ID with bookid = " + bookID + " is found "
-            + " or No studentID with studentid = " + studentID + " is found.");
             clear();
             return;
         }
-        
-        
-        JOptionPane.showMessageDialog(null, "The student with id = " + studentID + " should pay a return fee of "
-        + result + " US dollars for the book with id " + bookID);
-        
-        
-        //Need to be before every return.
-        clear();
+
+        //check: if no bookID or studentID is found.
+        //Record should be deleted from the list of borrowing operations.
+        String studentID = studentId.getText();
+        String bookID = bookId.getText();
+
+        this.setVisible(false);
+        LibrarianRoleWindow parentFrame = (LibrarianRoleWindow) parent;
+        parentFrame.setVisible(true);
+
+        LocalDate returnDateTime = LocalDate.ofInstant(returnDate.getDate().toInstant(), ZoneId.systemDefault());
+        try {
+            double result = parentFrame.getLbRole().returnBook(studentID, bookID, returnDateTime);
+            if (result == -1) {
+                JOptionPane.showMessageDialog(null, "No Book ID with bookid = " + bookID + " is found "
+                        + " or No studentID with studentid = " + studentID + " is found.");
+                clear();
+                return;
+            }
+
+            JOptionPane.showMessageDialog(null, "The student with id = " + studentID + " should pay a return fee of "
+                    + result + " US dollars for the book with id " + bookID);
+
+            //Need to be before every return.
+            clear();
+        } catch (IdNotFoundException infe) {//useless try catch
+
+        }
+
     }//GEN-LAST:event_returnButtonActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         // TODO add your handling code here:
-        
+
         clear();
         this.setVisible(false);
         LibrarianRoleWindow parentFrame = (LibrarianRoleWindow) parent;
