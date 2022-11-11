@@ -234,37 +234,36 @@ public class AddBookWindow extends javax.swing.JFrame implements Node {
     
         //check if number of Copies is a string not a numeric value.
         String bookID = bookId.getText();
+        LibrarianRoleWindow parentFrame = (LibrarianRoleWindow) parent;
         try {
-            System.out.println(bookID);
             checkFieldEmpty();
-            int copies = noOfCopiesCheck();
-            this.setVisible(false);
-            LibrarianRoleWindow parentFrame = (LibrarianRoleWindow) parent;
-            parentFrame.setVisible(true);
+            int copies = noOfCopiesCheck();            
+                        
             String title = titleName.getText();
             String author = authorName.getText();
             String publisher = publisherName.getText();
-            clear();
-            parentFrame.getLbRole().addBook(bookID, title, author, publisher, copies);            
-            JOptionPane.showMessageDialog(null, "The book with id = " +  bookID + " has been successfully added.");
             
+            parentFrame.getLbRole().addBook(bookID, title, author, publisher, copies);
+            
+            clear();                     
+            JOptionPane.showMessageDialog(null, "The book with id = " +  bookID + " has been successfully added.");               
         } 
         
         
         catch(EmptyFieldException efe){
+             clear();     
             JOptionPane.showMessageDialog(null, "Some fields are empty");
         }
         catch (NumberFormatException nfe) {
+             clear();     
             JOptionPane.showMessageDialog(null, "You should enter a numeric value in the field whose name is "
                     + " \"No of Copies\" ");
         }
         
         catch(RepeatedIdException rie){
+             clear(); 
              JOptionPane.showMessageDialog(null, "The book with ID "+ bookID + " already exists!");
         }
-
-        //TODO check if the BookId is repeated.
-       
 
     }//GEN-LAST:event_addButtonActionPerformed
 
