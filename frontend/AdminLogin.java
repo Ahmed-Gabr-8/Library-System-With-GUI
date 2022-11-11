@@ -161,6 +161,9 @@ public class AdminLogin extends javax.swing.JFrame implements Node {
             this.setVisible(false);
             adRoleWindow.setVisible(true);
         }
+        
+        jTextField1.setText("");
+        jPasswordField1.setText("");
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed

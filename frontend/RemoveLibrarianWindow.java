@@ -23,6 +23,12 @@ public class RemoveLibrarianWindow extends javax.swing.JFrame implements Node {
         this.setTitle("Remove Librarian");
         this.parent = parent;
     }
+    
+    
+    
+    private void clear() {
+        Id.setText("");
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -114,6 +120,7 @@ public class RemoveLibrarianWindow extends javax.swing.JFrame implements Node {
 
         this.setVisible(false);
         parentFrame.setVisible(true);
+        clear();
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
