@@ -1,27 +1,26 @@
-
 package lab.frontend;
+
 import lab.backend.AdminRole;
 
 public class AdminRoleWindow extends javax.swing.JFrame implements Node {
 
-     private AddLibrarianWindow addLibrarianWindow;
-     private AdminRole adRole;
-     private Node parent;
-     private ViewTableWindow viewLibrariansWindow;
+    private AddLibrarianWindow addLibrarianWindow;
+    private AdminRole adRole;
+    private Node parent;
+    private ViewTableWindow viewLibrariansWindow;
+    private RemoveLibrarianWindow removeLibrarianWindow;
 
     public AdminRole getAdRole() {
         return adRole;
     }
-    
-    
+
     public AdminRoleWindow(Node parent) {
         initComponents();
         adRole = new AdminRole();
         this.setTitle("Admin Role");
         this.parent = parent;
-        
+
     }
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -66,6 +65,11 @@ public class AdminRoleWindow extends javax.swing.JFrame implements Node {
         jButton6.setBackground(new java.awt.Color(0, 0, 0));
         jButton6.setForeground(new java.awt.Color(255, 255, 255));
         jButton6.setText("Remove Librarian");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
 
         jButton7.setBackground(new java.awt.Color(0, 0, 0));
         jButton7.setForeground(new java.awt.Color(255, 255, 255));
@@ -111,43 +115,53 @@ public class AdminRoleWindow extends javax.swing.JFrame implements Node {
     }//GEN-LAST:event_formWindowClosing
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-          if(addLibrarianWindow == null)
-        {
-            addLibrarianWindow= new AddLibrarianWindow(this);
+        if (addLibrarianWindow == null) {
+            addLibrarianWindow = new AddLibrarianWindow(this);
         }
-        
+
         this.setVisible(false);
         addLibrarianWindow.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-    if(viewLibrariansWindow == null)
-        {
+        if (viewLibrariansWindow == null) {
             viewLibrariansWindow = new ViewTableWindow(this, new String[]{"Librarian ID", "Name", "Email", "Address", "Phone Number"}, "View Librarians");
-        
+
         }
-        
+
         String[] librarianUsersStrings = adRole.getListOfLibrariansAsString();
-        if(librarianUsersStrings.length == 0){
+        if (librarianUsersStrings.length == 0) {
             javax.swing.JOptionPane.showMessageDialog(null, "No Librarians Added yet");
             return;
         }
         String[][] librarianUsersData = new String[librarianUsersStrings.length][5];
-        for(int i =0; i<librarianUsersStrings.length; i++){
+        for (int i = 0; i < librarianUsersStrings.length; i++) {
             librarianUsersData[i] = librarianUsersStrings[i].split(",");
         }
         viewLibrariansWindow.setTableData(librarianUsersData);
         this.setVisible(false);
-        viewLibrariansWindow.setVisible(true); 
+        viewLibrariansWindow.setVisible(true);
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
-        adRole.logout();        
+        adRole.logout();
         this.setVisible(false);
         FirstFrame parentFrame = (FirstFrame) parent.getNodeParent();
         parentFrame.setVisible(true);
     }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+
+        // TODO add your handling code here:
+        if (removeLibrarianWindow == null) {
+            removeLibrarianWindow = new RemoveLibrarianWindow(this);
+        }
+
+        this.setVisible(false);
+        removeLibrarianWindow.setVisible(true);
+        //GEN-LAST:event_jButton6ActionPerformed
+    }//GEN-LAST:event_jButton6ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
