@@ -191,6 +191,7 @@ public class AddLibrarianWindow extends javax.swing.JFrame implements Node {
         String email = Email.getText();
         String address = Address.getText();
         String phoneNumber = PhoneNumber.getText();
+        clear();
         try {
 
             parentFrame.getAdRole().addLibrarian(id, name, email, address, phoneNumber);
@@ -200,7 +201,7 @@ public class AddLibrarianWindow extends javax.swing.JFrame implements Node {
         } catch (RepeatedIdException rie) {
             JOptionPane.showMessageDialog(null, "The librarian with id: " + id + " already exists!");
         }
-        clear();
+        
 
     }//GEN-LAST:event_jButton1ActionPerformed
 

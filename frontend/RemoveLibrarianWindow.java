@@ -110,6 +110,7 @@ public class RemoveLibrarianWindow extends javax.swing.JFrame implements Node {
         // TODO add your handling code here:
         AdminRoleWindow parentFrame = (AdminRoleWindow) parent;
         String id = Id.getText();
+        clear();
         try {           
             parentFrame.getAdRole().removeLibrarian(id);
             JOptionPane.showMessageDialog(null,"The librarian with id= "+id+" has been removed successfully " );
@@ -120,7 +121,7 @@ public class RemoveLibrarianWindow extends javax.swing.JFrame implements Node {
 
         this.setVisible(false);
         parentFrame.setVisible(true);
-        clear();
+        
 
     }//GEN-LAST:event_jButton1ActionPerformed
 

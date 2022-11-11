@@ -233,19 +233,20 @@ public class AddBookWindow extends javax.swing.JFrame implements Node {
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
     
         //check if number of Copies is a string not a numeric value.
+        String bookID = bookId.getText();
         try {
+            System.out.println(bookID);
             checkFieldEmpty();
             int copies = noOfCopiesCheck();
             this.setVisible(false);
             LibrarianRoleWindow parentFrame = (LibrarianRoleWindow) parent;
             parentFrame.setVisible(true);
-
-            String bookID = bookId.getText();
             String title = titleName.getText();
             String author = authorName.getText();
             String publisher = publisherName.getText();
-            parentFrame.getLbRole().addBook(bookID, title, author, publisher, copies);
-            JOptionPane.showMessageDialog(null, "The book with id = " + bookId.getText() + " has been successfully added.");
+            clear();
+            parentFrame.getLbRole().addBook(bookID, title, author, publisher, copies);            
+            JOptionPane.showMessageDialog(null, "The book with id = " +  bookID + " has been successfully added.");
             
         } 
         
@@ -259,11 +260,11 @@ public class AddBookWindow extends javax.swing.JFrame implements Node {
         }
         
         catch(RepeatedIdException rie){
-             JOptionPane.showMessageDialog(null, "The book with ID " + bookId + " already exists!");
+             JOptionPane.showMessageDialog(null, "The book with ID "+ bookID + " already exists!");
         }
 
         //TODO check if the BookId is repeated.
-        clear();
+       
 
     }//GEN-LAST:event_addButtonActionPerformed
 
