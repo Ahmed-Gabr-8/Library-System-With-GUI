@@ -145,7 +145,8 @@ public class AdminRoleWindow extends javax.swing.JFrame implements Node {
         // TODO add your handling code here:
         adRole.logout();        
         this.setVisible(false);
-        System.exit(0);
+        FirstFrame parentFrame = (FirstFrame) parent.getNodeParent();
+        parentFrame.setVisible(true);
     }//GEN-LAST:event_jButton7ActionPerformed
 
 
