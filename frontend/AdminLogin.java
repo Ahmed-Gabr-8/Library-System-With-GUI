@@ -3,9 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package lab.frontend;
+
 import lab.constants.LoginCredentials;
-
-
 
 /**
  *
@@ -142,26 +141,28 @@ public class AdminLogin extends javax.swing.JFrame implements Node {
         this.setVisible(false);
         javax.swing.JFrame parentFrame = (javax.swing.JFrame) parent;
         parentFrame.setVisible(true);
-        
+
 
     }//GEN-LAST:event_formWindowClosing
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String username = jTextField1.getText();       
+        String username = jTextField1.getText();
         String password = String.valueOf(jPasswordField1.getPassword());
-        if(!username.equals(LoginCredentials.ADMIN_USERNAME) || !password.equals(LoginCredentials.ADMIN_PASSWORD)){
+        if (!username.equals(LoginCredentials.ADMIN_USERNAME) || !password.equals(LoginCredentials.ADMIN_PASSWORD)) {
             javax.swing.JOptionPane.showMessageDialog(null, "Wrong Username or Password!");
-        }
-        
-        else{
-            if(adRoleWindow == null ){
+            this.setVisible(false);
+            javax.swing.JFrame parentFrame = (javax.swing.JFrame) parent;
+            parentFrame.setVisible(true);
+
+        } else {
+            if (adRoleWindow == null) {
                 adRoleWindow = new AdminRoleWindow(this);
             }
-           
+
             this.setVisible(false);
             adRoleWindow.setVisible(true);
         }
-        
+
         jTextField1.setText("");
         jPasswordField1.setText("");
     }//GEN-LAST:event_jButton1ActionPerformed

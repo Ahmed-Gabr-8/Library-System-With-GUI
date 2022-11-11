@@ -145,6 +145,9 @@ public class LibrarianLogin extends javax.swing.JFrame implements Node{
         String password = String.valueOf(passwordLogin.getPassword());
         if(!username.equals(LoginCredentials.LIBRARIAN_USERNAME) || !password.equals(LoginCredentials.LIBRARIAN_PASSWORD)){
             javax.swing.JOptionPane.showMessageDialog(null, "Wrong Username or Password!");
+            this.setVisible(false);
+            javax.swing.JFrame parentFrame = (javax.swing.JFrame) parent;
+            parentFrame.setVisible(true);
         }
 
         else{
