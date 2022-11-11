@@ -18,7 +18,9 @@ public class LibrarianRole {
         if (bookDb == null) {
             System.out.println("Database not found");
         } else {
+            
             bookDb.insertRecord(new Book(bookId, title, authorName, publisherName, quantity));
+                
         }
 
     }
@@ -38,6 +40,15 @@ public class LibrarianRole {
 
     public StudentBook[] getListOfBorrowingOperations() {
         return studentBookDb.returnAllRecords().toArray(new StudentBook[0]);
+    }
+    
+    public String[] getListOfBorrowedBooksAsString() {
+        StudentBook[] borrowedBooks = this.getListOfBorrowingOperations();
+        String[] StudentsBooksStrings = new String[borrowedBooks.length];
+        for(int i=0; i< borrowedBooks.length; i++){
+            StudentsBooksStrings[i] = borrowedBooks[i].lineRepresentation();
+        }
+        return StudentsBooksStrings;
     }
 
     public int borrowBook(String studentId, String bookId, LocalDate borrowDate) {

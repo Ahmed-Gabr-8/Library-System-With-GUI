@@ -198,15 +198,6 @@ public class AddBookWindow extends javax.swing.JFrame implements Node {
 
     private void noOfCopiesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_noOfCopiesActionPerformed
 
-//        try{
-//        int copies = Integer.parseInt(noOfCopies.getText());
-//        System.out.println("Copies = "  + copies);
-//        }
-//        catch(NumberFormatException e)
-//        {
-//            JOptionPane.showMessageDialog(null, "You should enter a numeric value in the field whose name is " +
-//                   " \"No of Copies\" ");
-//        }
     }//GEN-LAST:event_noOfCopiesActionPerformed
 
     private int noOfCopiesCheck() throws NumberFormatException {
@@ -224,6 +215,15 @@ public class AddBookWindow extends javax.swing.JFrame implements Node {
     }
 
 
+    private void clear()
+    {
+        bookId.setText("");
+        titleName.setText("");
+        authorName.setText("");
+        publisherName.setText("");
+        noOfCopies.setText("");
+    }
+    
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
         // TODO add your handling code here:
 
@@ -248,26 +248,29 @@ public class AddBookWindow extends javax.swing.JFrame implements Node {
         this.setVisible(false);
         LibrarianRoleWindow parentFrame = (LibrarianRoleWindow) parent;
         parentFrame.setVisible(true);
-
-        //TODO check if the BookId is repeated.
+        
         String bookID = bookId.getText();
         String title = titleName.getText();
         String author = authorName.getText();
         String publisher = publisherName.getText();
         parentFrame.getLbRole().addBook(bookID, title, author, publisher, copies);
-        //addBook(bookID,title,author,publisher,copies);
 
-//        this.setVisible(false);
-//        
-//        javax.swing.JFrame parentFrame = (javax.swing.JFrame) parent;
-//        parentFrame.setVisible(true);
-
+        
+        //TODO check if the BookId is repeated.
+        
+        
+        
+        
+        JOptionPane.showMessageDialog(null, "The book with id = " + bookId.getText() + " has been successfully added.");
+        clear();
+        
     }//GEN-LAST:event_addButtonActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
          this.setVisible(false);
         javax.swing.JFrame parentFrame = (javax.swing.JFrame) parent;
         parentFrame.setVisible(true);
+        clear();
     }//GEN-LAST:event_formWindowClosing
 
 

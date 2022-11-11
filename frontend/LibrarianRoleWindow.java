@@ -11,6 +11,9 @@ public class LibrarianRoleWindow extends javax.swing.JFrame implements Node {
     private AddBookWindow addBookWindow;
     private LibrarianRole lbRole;
     private ViewTableWindow viewBooksWindow;
+    private BorrowBookWindow borrowBookWindow;
+    private ReturnBookWindow returnBookWindow;
+    private ViewTableWindow viewBorrowedBooksWindow;
     
 
     public LibrarianRole getLbRole() {
@@ -190,15 +193,51 @@ public class LibrarianRoleWindow extends javax.swing.JFrame implements Node {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
+        
+        if(borrowBookWindow == null)
+        {
+            borrowBookWindow = new BorrowBookWindow(this);
+        }
+        
+        this.setVisible(false);
+        borrowBookWindow.setVisible(true);
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
+        
+        if(viewBorrowedBooksWindow == null)
+        {
+            viewBorrowedBooksWindow = new ViewTableWindow(this, new String[]{"Student ID", "Book ID", "Borrow Date"}, "View Borrowed Books");
+        
+        }
+        
+        String[] studentsBooksStrings = lbRole.getListOfBorrowedBooksAsString();
+        if(studentsBooksStrings.length == 0){
+            javax.swing.JOptionPane.showMessageDialog(null, "No Books have been borrowed yet");
+            return;
+        }
+        String[][] studentBookData = new String[studentsBooksStrings.length][3];
+        for(int i =0; i<studentsBooksStrings.length; i++){
+            studentBookData[i] = studentsBooksStrings[i].split(",");
+        }
+        viewBorrowedBooksWindow.setTableData(studentBookData);
+        this.setVisible(false);
+        viewBorrowedBooksWindow.setVisible(true);
+        
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
+        
+        if(returnBookWindow == null)
+        {
+            returnBookWindow = new ReturnBookWindow(this);
+        }
+        
+        this.setVisible(false);
+        returnBookWindow.setVisible(true);
+        
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
@@ -207,15 +246,13 @@ public class LibrarianRoleWindow extends javax.swing.JFrame implements Node {
         lbRole.logout();
         
         this.setVisible(false);
-        System.exit(0);
+        FirstFrame parentFrame = (FirstFrame) parent;
+        parentFrame.setVisible(true);
         
         
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        this.setVisible(false);
-        javax.swing.JFrame parentFrame = (javax.swing.JFrame) parent;
-        parentFrame.setVisible(true);
         
     }//GEN-LAST:event_formWindowClosing
 
